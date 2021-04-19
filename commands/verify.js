@@ -22,37 +22,37 @@ module.exports = {
 
             if(!userInfo.status.admitted){
                 try {
-                    await UserController.admitUser(userID);
+                    await UserController.admitUser(userInfo.id);
                 }
                 catch(e){
-                    console.log("error force admitting " + userID);
+                    console.log("error force admitting " + userInfo.id);
                     console.log(e);
                 }
             }
 
             if(!userInfo.status.confirmed) {
                 try {
-                    await UserController.confirmUser(userID);
+                    await UserController.confirmUser(userInfo.id);
                 }
                 catch(e){
-                    console.log("error auto confirming " + userID);
+                    console.log("error auto confirming " + userInfo.id);
                     console.log(e);
                 }
             }
 
             try {
-                await UserController.waiverIn(userID);
+                await UserController.waiverIn(userInfo.id);
             }
             catch(e){
-                console.log("error setting user waiver in " + userID);
+                console.log("error setting user waiver in " + userInfo.id);
                 console.log(e);
             }
 
             try {
-                await UserController.checkIn(userID);
+                await UserController.checkIn(userInfo.id);
             }
             catch(e){
-                console.log("error checking in " + userID);
+                console.log("error checking in " + userInfo.id);
                 console.log(e);
             }
 
