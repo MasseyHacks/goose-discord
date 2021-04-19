@@ -55,12 +55,13 @@ UserController.admitUser = async function(userID) {
 
 UserController.confirmUser = async function(userID) {
     let response = (await axios({
-        url: process.env.GOOSE_CONTACT_POINT + '/acceptInvitation',
+        url: process.env.GOOSE_CONTACT_POINT + '/adminAcceptInvitation',
         method: 'POST',
         headers: {
             'x-access-token': process.env.GOOSE_ACCESS_TOKEN
         },
         data: {
+            "userID": userID,
             "confirmation": {
                 "additionalNotes": "Autoconfirmed by bot."
             }
