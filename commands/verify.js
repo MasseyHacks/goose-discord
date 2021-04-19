@@ -20,6 +20,38 @@ module.exports = {
 
             let userInfo = await UserController.verifyUser(email, userID);
 
+            if(!userInfo.status.admitted){
+                try {
+                    await UserController.admitUser(userID);
+                }
+                catch(e){
+                    console.log("error force admitting " + userID);
+                }
+            }
+
+            if(!userInfo.status.confirmed) {
+                try {
+                    await UserController.confirmUser(userID);
+                }
+                catch(e){
+                    console.log("error auto confirming " + userID);
+                }
+            }
+
+            try {
+                await UserController.waiverIn(userID);
+            }
+            catch(e){
+                console.log("error setting user waiver in " + userID);
+            }
+            
+            try {
+                await UserController.checkIn(userID);
+            }
+            catch(e){
+                console.log("error checking in " + userID);
+            }
+
             await discordUser.roles.add(process.env.VERIFIED_ROLE_ID);
             await discordUser.roles.add(process.env.PARTICIPANT_ROLE_ID);
             await discordUser.setNickname(userInfo.fullName);

@@ -37,4 +37,67 @@ UserController.verifyUser = async function(email, discordID) {
 
     return userInfo;
 }
+
+UserController.admitUser = async function(userID) {
+    let response = (await axios({
+        url: process.env.GOOSE_CONTACT_POINT + '/forceAccept',
+        method: 'POST',
+        headers: {
+            'x-access-token': process.env.GOOSE_ACCESS_TOKEN
+        },
+        data: {
+            "userID": userID
+        }
+    })).data;
+
+    return response;
+}
+
+UserController.confirmUser = async function(userID) {
+    let response = (await axios({
+        url: process.env.GOOSE_CONTACT_POINT + '/acceptInvitation',
+        method: 'POST',
+        headers: {
+            'x-access-token': process.env.GOOSE_ACCESS_TOKEN
+        },
+        data: {
+            "confirmation": {
+                "additionalNotes": "Autoconfirmed by bot."
+            }
+        }
+    })).data;
+
+    return response;
+}
+
+UserController.waiverIn = async function(userID){
+    let response = (await axios({
+        url: process.env.GOOSE_CONTACT_POINT + '/waiverIn',
+        method: 'POST',
+        headers: {
+            'x-access-token': process.env.GOOSE_ACCESS_TOKEN
+        },
+        data: {
+            "userID": userID
+        }
+    })).data;
+
+    return response;
+}
+
+UserController.checkIn = async function(userID) {
+    let response = (await axios({
+        url: process.env.GOOSE_CONTACT_POINT + '/waiverIn',
+        method: 'POST',
+        headers: {
+            'x-access-token': process.env.GOOSE_ACCESS_TOKEN
+        },
+        data: {
+            "userID": userID
+        }
+    })).data;
+
+    return response;
+}
+
 module.exports = UserController;
