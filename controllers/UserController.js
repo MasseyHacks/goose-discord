@@ -15,7 +15,10 @@ UserController.verifyUser = async function(email, discordID) {
             "filters": {
                 "$and": [
                     {
-                        "permissions.checkin":"false"
+                        "permissions.checkin": "false",
+                        "permissions.verified": "true",
+                        "status.rejected": "false",
+                        "status.declined": "false"
                     },
                     {
                         "email":{
