@@ -91,7 +91,7 @@ UserController.waiverIn = async function(userID){
 
 UserController.checkIn = async function(userID) {
     let response = (await axios({
-        url: process.env.GOOSE_CONTACT_POINT + '/waiverIn',
+        url: process.env.GOOSE_CONTACT_POINT + '/checkIn',
         method: 'POST',
         headers: {
             'x-access-token': process.env.GOOSE_ACCESS_TOKEN
