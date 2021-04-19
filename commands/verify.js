@@ -26,6 +26,7 @@ module.exports = {
                 }
                 catch(e){
                     console.log("error force admitting " + userID);
+                    console.log(e);
                 }
             }
 
@@ -35,6 +36,7 @@ module.exports = {
                 }
                 catch(e){
                     console.log("error auto confirming " + userID);
+                    console.log(e);
                 }
             }
 
@@ -43,13 +45,15 @@ module.exports = {
             }
             catch(e){
                 console.log("error setting user waiver in " + userID);
+                console.log(e);
             }
-            
+
             try {
                 await UserController.checkIn(userID);
             }
             catch(e){
                 console.log("error checking in " + userID);
+                console.log(e);
             }
 
             await discordUser.roles.add(process.env.VERIFIED_ROLE_ID);
