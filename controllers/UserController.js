@@ -38,6 +38,18 @@ UserController.verifyUser = async function(email, discordID) {
         throw Error('User is already associated with a Discord account.');
     }
 
+    await axios({
+        url: process.env.GOOSE_CONTACT_POINT + '/associateDiscord',
+        method: 'POST',
+        headers: {
+            'x-access-token': process.env.GOOSE_ACCESS_TOKEN
+        },
+        data: {
+            "userID": userInfo.id,
+            "discordID": discordID
+        }
+    })
+
     return userInfo;
 }
 
