@@ -58,7 +58,7 @@ module.exports = {
 
             await discordUser.roles.add(process.env.VERIFIED_ROLE_ID);
             await discordUser.roles.add(process.env.PARTICIPANT_ROLE_ID);
-            await discordUser.setNickname(userInfo.fullName);
+            await discordUser.setNickname(userInfo.firstName + " " + userInfo.lastName.charAt(0));
             return "Successfully verified!"
         }
         catch (e) {
