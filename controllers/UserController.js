@@ -116,4 +116,30 @@ UserController.checkIn = async function(userID) {
     return response;
 }
 
+UserController.getByDiscordID = async function(discordID) {
+    let usersInfo = (await axios({
+        url: process.env.GOOSE_CONTACT_POINT + '/users',
+        method: 'POST',
+        headers: {
+            'x-access-token': process.env.GOOSE_ACCESS_TOKEN
+        },
+        data: {
+            "page":1,
+            "size":1,
+            "text":"",
+            "filters": {
+                "$and": [
+                    {
+                        "discordID": discordID
+                    }
+                ]
+            }
+        }
+    })).data;
+    if(usersInfo.users.length < 1){
+        throw Error('Your Discord account is not linked with a 7WC account. Contact an organizer for assistance.');
+    }
+    return usersInfo.users[0];
+}
+
 module.exports = UserController;
