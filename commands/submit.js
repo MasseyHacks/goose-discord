@@ -8,6 +8,7 @@ module.exports = {
         const userID = member.user.id;
 
         try {
+            return "Submissions will be open on Tuesday at 4 pm."
             let discordUser = await channel.guild.members.fetch(userID);
             let userInfo = await UserController.getByDiscordID(userID)
             await discordUser.send(`Your submission link:  ${process.env.SUBMISSION_FORM_URL.replace("{{EMAIL}}", userInfo.email).replace("{{USERID}}", userInfo.id)}`)
