@@ -142,4 +142,14 @@ UserController.getByDiscordID = async function(discordID) {
     return usersInfo.users[0];
 }
 
+UserController.getUserInfo = async function(userID) {
+    return (await axios({
+        url: process.env.GOOSE_CONTACT_POINT + '/user/' + userID,
+        method: 'GET',
+        headers: {
+            'x-access-token': process.env.GOOSE_ACCESS_TOKEN
+        }
+    })).data;
+}
+
 module.exports = UserController;

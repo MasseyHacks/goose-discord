@@ -2,16 +2,24 @@ require('dotenv').config();
 const discord = require('discord.js');
 const WOKCommands = require('wokcommands');
 
+const domainautofulfill = require('./services/domainautofulfill');
+
 const client = new discord.Client({
     // Use recommended partials for the built-in help menu
     partials: ['MESSAGE', 'REACTION']
 })
 
 client.on('ready', async () => {
+    // Start the order check
+    domainautofulfill(client);
+
+    setInterval(function() {
+        domainautofulfill(client);
+    }, 5 * 60 * 1000)
+
     // The client object is required as the first argument.
     // The second argument is the options object.
     // All properties of this object are optional.
-
     new WOKCommands(client, {
         // The name of the local folder for your command files
         commandsDir: 'commands',

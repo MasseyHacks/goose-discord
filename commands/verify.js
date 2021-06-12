@@ -4,7 +4,7 @@ module.exports = {
     testOnly: true,
     description: 'Verify yourself and associate your Discord account with your 7WC account.',
     minArgs: 1,
-    expectedArgs: '<Email>',
+    expectedArgs: '<email>',
     category: 'Setup',
     callback: async ({ args, text, member, channel, client }) => {
         const [email] = args;
